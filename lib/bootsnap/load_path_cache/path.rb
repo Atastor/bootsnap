@@ -8,14 +8,14 @@ module Bootsnap
       # distribution. When adding or removing files in these paths, the cache
       # must be cleared before the change will be noticed.
       def stable?
-        true
+        false
       end
 
       # A path is considered volatile if it doesn't live under a Gem.path or
       # the ruby distribution root. These paths are scanned for new additions
       # more frequently.
       def volatile?
-        stability == VOLATILE
+        true
       end
 
       attr_reader(:path)
