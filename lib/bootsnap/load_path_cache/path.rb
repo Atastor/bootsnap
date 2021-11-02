@@ -8,7 +8,7 @@ module Bootsnap
       # distribution. When adding or removing files in these paths, the cache
       # must be cleared before the change will be noticed.
       def stable?
-        stability == STABLE
+        true
       end
 
       # A path is considered volatile if it doesn't live under a Gem.path or
@@ -100,7 +100,7 @@ module Bootsnap
         @stability ||= begin
           if Gem.path.detect { |p| expanded_path.start_with?(p.to_s) }
             STABLE
-          elsif Bootsnap.bundler? && !Bundler.bundle_path.nil? && expanded_path.start_with?(Bundler.bundle_path.to_s)
+          elsif Bootsnap.bundler? && expanded_path.start_with?(Bundler.bundle_path.to_s)
             STABLE
           elsif expanded_path.start_with?(RUBY_LIBDIR) && !expanded_path.start_with?(RUBY_SITEDIR)
             STABLE
